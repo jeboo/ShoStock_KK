@@ -178,6 +178,19 @@
 
 .field private final mWindowManagerFuncs:Landroid/view/WindowManagerPolicy$WindowManagerFuncs;
 
+.field private mDownload:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+.field private mRecovery:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+.field private mFlashlight:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+.field mScreenshot:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+.field mScreenshotConnection:Landroid/content/ServiceConnection;
+
+.field final mScreenshotLock:Ljava/lang/Object;
+
+.field final mScreenshotTimeout:Ljava/lang/Runnable;
 
 # direct methods
 .method static constructor <clinit>()V
@@ -285,6 +298,22 @@
     sget-object v3, Lcom/android/internal/policy/impl/GlobalActions$ToggleAction$State;->Off:Lcom/android/internal/policy/impl/GlobalActions$ToggleAction$State;
 
     iput-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mDataNetworkState:Lcom/android/internal/policy/impl/GlobalActions$ToggleAction$State;
+	
+new-instance v3, Ljava/lang/Object;
+
+    invoke-direct {v3}, Ljava/lang/Object;-><init>()V
+
+    iput-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotLock:Ljava/lang/Object;
+
+    const/4 v3, 0x0
+
+    iput-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotConnection:Landroid/content/ServiceConnection;
+
+    new-instance v3, Lcom/android/internal/policy/impl/GlobalActions$30;
+
+    invoke-direct {v3, p0}, Lcom/android/internal/policy/impl/GlobalActions$30;-><init>(Lcom/android/internal/policy/impl/GlobalActions;)V
+
+iput-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotTimeout:Ljava/lang/Runnable;
 
     .line 167
     iput-boolean v5, p0, Lcom/android/internal/policy/impl/GlobalActions;->mIsWaitingForEcmExit:Z
@@ -759,6 +788,14 @@
     iget-object v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mConfirmDialog:Landroid/app/AlertDialog;
 
     return-object v0
+.end method
+
+.method static synthetic access$1701(Lcom/android/internal/policy/impl/GlobalActions;)V
+    .registers 1
+
+    invoke-direct {p0}, Lcom/android/internal/policy/impl/GlobalActions;->takeScreenshot()V
+
+    return-void
 .end method
 
 .method static synthetic access$1702(Lcom/android/internal/policy/impl/GlobalActions;Landroid/app/AlertDialog;)Landroid/app/AlertDialog;
@@ -2085,6 +2122,46 @@
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mRestart:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
 
+new-instance v0, Lcom/android/internal/policy/impl/GlobalActions$26;
+
+    const v1, 0x1080fcc
+
+    const v2, 0x1040b34
+
+    invoke-direct {v0, p0, v1, v2}, Lcom/android/internal/policy/impl/GlobalActions$26;-><init>(Lcom/android/internal/policy/impl/GlobalActions;II)V
+
+    iput-object v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mRecovery:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+    new-instance v0, Lcom/android/internal/policy/impl/GlobalActions$27;
+
+    const v1, 0x1080fcd
+
+    const v2, 0x1040b35
+
+    invoke-direct {v0, p0, v1, v2}, Lcom/android/internal/policy/impl/GlobalActions$27;-><init>(Lcom/android/internal/policy/impl/GlobalActions;II)V
+
+    iput-object v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mDownload:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+    new-instance v0, Lcom/android/internal/policy/impl/GlobalActions$28;
+
+    const v1, 0x1080fce
+
+    const v2, 0x1040b36
+
+    invoke-direct {v0, p0, v1, v2}, Lcom/android/internal/policy/impl/GlobalActions$28;-><init>(Lcom/android/internal/policy/impl/GlobalActions;II)V
+
+    iput-object v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mFlashlight:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+    new-instance v0, Lcom/android/internal/policy/impl/GlobalActions$29;
+
+    const v1, 0x1080fcf
+
+    const v2, 0x1040b37
+
+    invoke-direct {v0, p0, v1, v2}, Lcom/android/internal/policy/impl/GlobalActions$29;-><init>(Lcom/android/internal/policy/impl/GlobalActions;II)V
+
+iput-object v0, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshot:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
     .line 922
     new-instance v0, Lcom/android/internal/policy/impl/GlobalActions$9;
 
@@ -2110,10 +2187,10 @@
     .line 1011
     sget-boolean v0, Lcom/android/internal/policy/impl/GlobalActions;->mIsCoverOpen:Z
 
-    if-nez v0, :cond_207
+#    if-nez v0, :cond_207
 
     .line 1012
-    const/4 v0, 0x3
+const/4 v0, 0x7
 
     new-array v0, v0, [Lcom/android/internal/policy/impl/GlobalActions$Action;
 
@@ -2134,6 +2211,30 @@
     iget-object v2, p0, Lcom/android/internal/policy/impl/GlobalActions;->mRestart:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
 
     aput-object v2, v0, v1
+	
+    const/4 v1, 0x3
+
+    iget-object v2, p0, Lcom/android/internal/policy/impl/GlobalActions;->mRecovery:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x4
+
+    iget-object v2, p0, Lcom/android/internal/policy/impl/GlobalActions;->mDownload:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x5
+
+    iget-object v2, p0, Lcom/android/internal/policy/impl/GlobalActions;->mFlashlight:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+    aput-object v2, v0, v1
+
+    const/4 v1, 0x6
+
+    iget-object v2, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshot:Lcom/android/internal/policy/impl/GlobalActions$SinglePressAction;
+
+aput-object v2, v0, v1
 
     invoke-static {v0}, Lcom/google/android/collect/Lists;->newArrayList([Ljava/lang/Object;)Ljava/util/ArrayList;
 
@@ -4674,4 +4775,96 @@
     invoke-direct {p0}, Lcom/android/internal/policy/impl/GlobalActions;->handleShow()V
 
     goto :goto_e
+.end method
+
+.method private takeScreenshot()V
+    .registers 9
+
+    .prologue
+    .line 4888
+    iget-object v4, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotLock:Ljava/lang/Object;
+
+    monitor-enter v4
+
+    .line 4889
+    :try_start_3
+    iget-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotConnection:Landroid/content/ServiceConnection;
+
+    if-eqz v3, :cond_9
+
+    .line 4890
+    monitor-exit v4
+
+    .line 4939
+    :goto_8
+    return-void
+
+    .line 4892
+    :cond_9
+    new-instance v0, Landroid/content/ComponentName;
+
+    const-string v3, "com.android.systemui"
+
+    const-string v5, "com.android.systemui.screenshot.TakeScreenshotService"
+
+    invoke-direct {v0, v3, v5}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 4894
+    .local v0, "cn":Landroid/content/ComponentName;
+    new-instance v2, Landroid/content/Intent;
+
+    invoke-direct {v2}, Landroid/content/Intent;-><init>()V
+
+    .line 4895
+    .local v2, "intent":Landroid/content/Intent;
+    invoke-virtual {v2, v0}, Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent;
+
+    .line 4896
+    new-instance v1, Lcom/android/internal/policy/impl/GlobalActions$31;
+
+    invoke-direct {v1, p0}, Lcom/android/internal/policy/impl/GlobalActions$31;-><init>(Lcom/android/internal/policy/impl/GlobalActions;)V
+
+    .line 4933
+    .local v1, "conn":Landroid/content/ServiceConnection;
+    iget-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mContext:Landroid/content/Context;
+
+    const/4 v5, 0x1
+
+    sget-object v6, Landroid/os/UserHandle;->CURRENT:Landroid/os/UserHandle;
+
+    invoke-virtual {v3, v2, v1, v5, v6}, Landroid/content/Context;->bindServiceAsUser(Landroid/content/Intent;Landroid/content/ServiceConnection;ILandroid/os/UserHandle;)Z
+
+    move-result v3
+
+    if-eqz v3, :cond_35
+
+    .line 4935
+    iput-object v1, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotConnection:Landroid/content/ServiceConnection;
+
+    .line 4936
+    iget-object v3, p0, Lcom/android/internal/policy/impl/GlobalActions;->mHandler:Landroid/os/Handler;
+
+    iget-object v5, p0, Lcom/android/internal/policy/impl/GlobalActions;->mScreenshotTimeout:Ljava/lang/Runnable;
+
+    const-wide/16 v6, 0x2710
+
+    invoke-virtual {v3, v5, v6, v7}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    .line 4938
+    :cond_35
+    monitor-exit v4
+
+    goto :goto_8
+
+    .end local v0    # "cn":Landroid/content/ComponentName;
+    .end local v1    # "conn":Landroid/content/ServiceConnection;
+    .end local v2    # "intent":Landroid/content/Intent;
+    :catchall_37
+    move-exception v3
+
+    monitor-exit v4
+    :try_end_39
+    .catchall {:try_start_3 .. :try_end_39} :catchall_37
+
+    throw v3
 .end method

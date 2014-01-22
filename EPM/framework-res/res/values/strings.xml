@@ -2915,4 +2915,8 @@ After exiting this mode, your widgets placed in Home screen may not display prop
     <item type="string" name="APKTOOL_DUMMY_0ae8">false</item>
     <item type="string" name="APKTOOL_DUMMY_0ae9">false</item>
     <item type="string" name="APKTOOL_DUMMY_0aea">false</item>
+	<string name="epm_recovery">Recovery</string>
+    <string name="epm_download">Download</string>
+    <string name="epm_flashlight">Flashlight</string>
+    <string name="epm_screenshot">Screenshot</string>
 </resources>

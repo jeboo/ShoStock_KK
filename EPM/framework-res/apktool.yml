@@ -1,5 +1,5 @@
 version: 1.5.2
-apkFileName: framework-res_orig.apk
+apkFileName: framework-res.apk
 isFrameworkApk: true
 sdkInfo:
   minSdkVersion: '19'
