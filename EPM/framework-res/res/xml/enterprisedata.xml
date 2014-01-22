@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<table name="MUMContainerType">
+    <row>
+        <column name="UID" value="0" />
+        <column name="UserID" value="-1" />
+        <column name="Name" value="knox-b2b" />
+        <column name="PasswordMinimumLength" value="8" />
+        <column name="PasswordMinimumNonLetters" value="4" />
+        <column name="PasswordMinimumLetters" value="4" />
+        <column name="PasswordMinimumSymbols" value="1" />
+        <column name="PasswordQuality" value="393216" />
+        <column name="MaximumFailedPasswordsForWipe" value="10" />
+        <column name="MaximumCharacterOccurences" value="0" />
+        <column name="MaximumCharacterSequenceLength" value="0" />
+        <column name="MaximumNumericSequenceLength" value="0" />
+        <column name="EncryptionRequired" value="true" />
+        <column name="CustomHomeScreenWallpaper" value="/system/container/resources/CustomHomeWallpaper-b2b.jpg" />
+        <column name="CustomStatusIcon" value="/system/container/resources/CustomStatusIcon-b2b.png" />
+        <column name="CustomStatusLabel" value="Enterprise Knox" />
+        <column name="AppInstallList">
+            <application name="com.samsung.dcm" />
+            <application name="com.samsung.android.provider.filterprovider" />
+            <application name="com.android.nfc" />
+            <application name="com.samsung.SMT" />
+            <application name="com.google.android.marvin.talkback" />
+            <application name="com.android.bluetooth" />
+            <application name="com.sec.android.app.popupuireceiver" />
+            <application name="com.visionobjects.resourcemanager" />
+            <application name="com.android.browser.provider" />
+            <application name="com.android.calendar" />
+            <application name="com.android.contacts" />
+            <application name="com.android.email" />
+            <application name="com.android.exchange" />
+            <application name="com.android.htmlviewer" />
+            <application name="com.android.musicfx" />
+            <application name="com.android.persona" />
+            <application name="com.sec.knox.modeswitcher" />
+            <application name="com.android.personashortcut" />
+            <application name="com.android.providers.calendar" />
+            <application name="com.android.providers.contacts" />
+            <application name="com.android.providers.downloads" />
+            <application name="com.android.providers.media" />
+            <application name="com.android.providers.telephony" />
+            <application name="com.infraware.polarisviewer5" />
+            <application name="com.osp.app.signin" />
+            <application name="com.samsung.android.snote" />
+            <application name="com.samsung.clipboardsaveservice" />
+            <application name="com.samsung.knox.bridge.clipboard.syncer" />
+            <application name="com.samsung.knox.rcp.components" />
+            <application name="com.sec.android.app.camera" />
+            <application name="com.sec.android.app.clockpackage" />
+            <application name="com.samsung.android.internal.smartassistant" />
+            <application name="com.sec.android.app.launcher" />
+            <application name="com.sec.android.app.music" />
+            <application name="com.sec.android.app.mv.player" />
+            <application name="com.sec.android.app.myfiles" />
+            <application name="com.sec.android.app.samsungapps" />
+            <application name="com.sec.android.app.sbrowser" />
+            <application name="com.sec.android.app.sbrowsertry" />
+            <application name="com.sec.android.app.videoplayer" />
+            <application name="com.sec.android.gallery3d" />
+            <application name="com.sec.android.provider.badge" />
+            <application name="com.sec.android.provider.logsprovider" />
+            <application name="com.sec.android.providers.tasks" />
+            <application name="com.sec.enterprise.knox.attestation" />
+            <application name="com.sec.enterprise.mdm.services.vpn" />
+            <application name="com.sec.factory.camera" />
+            <application name="com.sec.android.app.parser" />
+            <application name="com.sec.android.app.DataCreate" />
+            <application name="com.sec.knox.bridge" />
+            <application name="com.sec.knox.containeragent" />
+            <application name="com.sec.knox.seandroid" />
+            <application name="com.sec.knox.store" />
+            <application name="com.sec.smartcard.pinservice" />
+            <application name="com.sec.smartcard.manager" />
+            <application name="sstream.app" />
+            <application name="com.sec.tetheringprovision" />
+            <application name="com.samsung.android.sdk.spenv10" />
+            <application name="com.sec.android.mmapp" />
+            <application name="com.samsung.android.app.galaxyfinder" />
+            <application name="com.sec.android.app.taskmanager" />
+        </column>
+        <column name="ProtectedPkgList">
+            <protectedPkg name="com.sec.knox.setup" />
+            <protectedPkg name="com.sec.knox.modeswitcher" />
+        </column>
+        <column name="RCPDataSettings">
+            <provider name="Contacts">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Calendar">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Bookmarks">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Notifications">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Clipboard">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+            </provider>
+        </column>
+        <column name="RCPAllowChangeDataSettings">
+            <provider name="Contacts">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="false" />
+            </provider>
+            <provider name="Calendar">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="false" />
+            </provider>
+            <provider name="Bookmarks">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="false" />
+            </provider>
+            <provider name="Notifications">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Clipboard">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+            </provider>
+        </column>
+    </row>
+    <row>
+        <column name="UID" value="0" />
+        <column name="UserID" value="-1" />
+        <column name="Name" value="knox-b2c" />
+        <column name="PasswordMinimumLength" value="4" />
+        <column name="PasswordQuality" value="65536" />
+        <column name="MaximumFailedPasswordsForWipe" value="15" />
+        <column name="UserManaged" value="true" />
+        <column name="CustomBadgeIcon" value="/system/container/resources/CustomBadgeIcon-b2c.png" />
+        <column name="CustomLockScreenWallpaper" value="/system/container/resources/CustomLockWallpaper-b2c.png" />
+        <column name="CustomHomeScreenWallpaper" value="/system/container/resources/CustomHomeWallpaper-b2c.jpg" />
+        <column name="CustomStatusIcon" value="/system/container/resources/CustomStatusIcon-b2c.png" />
+        <column name="CustomStatusLabel" value="Consumer Knox" />
+        <column name="AppInstallList">
+            <application name="com.samsung.dcm" />
+            <application name="com.samsung.android.provider.filterprovider" />
+            <application name="com.android.nfc" />
+            <application name="com.samsung.SMT" />
+            <application name="com.google.android.marvin.talkback" />
+            <application name="com.android.bluetooth" />
+            <application name="com.sec.android.app.popupuireceiver" />
+            <application name="com.visionobjects.resourcemanager" />
+            <application name="com.android.browser.provider" />
+            <application name="com.android.calendar" />
+            <application name="com.android.contacts" />
+            <application name="com.android.email" />
+            <application name="com.android.exchange" />
+            <application name="com.android.htmlviewer" />
+            <application name="com.android.musicfx" />
+            <application name="com.android.persona" />
+            <application name="com.sec.knox.modeswitcher" />
+            <application name="com.android.personashortcut" />
+            <application name="com.android.providers.calendar" />
+            <application name="com.android.providers.contacts" />
+            <application name="com.android.providers.downloads" />
+            <application name="com.android.providers.media" />
+            <application name="com.android.providers.telephony" />
+            <application name="com.infraware.polarisviewer5" />
+            <application name="com.osp.app.signin" />
+            <application name="com.samsung.android.snote" />
+            <application name="com.samsung.clipboardsaveservice" />
+            <application name="com.samsung.knox.bridge.clipboard.syncer" />
+            <application name="com.samsung.knox.rcp.components" />
+            <application name="com.sec.android.app.camera" />
+            <application name="com.sec.android.app.clockpackage" />
+            <application name="com.samsung.android.internal.smartassistant" />
+            <application name="com.sec.android.app.launcher" />
+            <application name="com.sec.android.app.music" />
+            <application name="com.sec.android.app.mv.player" />
+            <application name="com.sec.android.app.myfiles" />
+            <application name="com.sec.android.app.samsungapps" />
+            <application name="com.sec.android.app.sbrowser" />
+            <application name="com.sec.android.app.sbrowsertry" />
+            <application name="com.sec.android.app.videoplayer" />
+            <application name="com.sec.android.gallery3d" />
+            <application name="com.sec.android.provider.badge" />
+            <application name="com.sec.android.provider.logsprovider" />
+            <application name="com.sec.android.providers.tasks" />
+            <application name="com.sec.enterprise.knox.attestation" />
+            <application name="com.sec.enterprise.mdm.services.vpn" />
+            <application name="com.sec.factory.camera" />
+            <application name="com.sec.android.app.parser" />
+            <application name="com.sec.android.app.DataCreate" />
+            <application name="com.sec.knox.bridge" />
+            <application name="com.sec.knox.containeragent" />
+            <application name="com.sec.knox.seandroid" />
+            <application name="com.sec.knox.store" />
+            <application name="com.sec.smartcard.pinservice" />
+            <application name="com.sec.smartcard.manager" />
+            <application name="sstream.app" />
+            <application name="com.sec.tetheringprovision" />
+            <application name="com.samsung.android.sdk.spenv10" />
+            <application name="com.sec.android.mmapp" />
+            <application name="com.samsung.android.app.galaxyfinder" />
+            <application name="com.sec.android.app.taskmanager" />
+        </column>
+        <column name="ProtectedPkgList">
+            <protectedPkg name="com.sec.knox.setup" />
+            <protectedPkg name="com.sec.knox.modeswitcher" />
+        </column>
+        <column name="RCPDataSettings">
+            <provider name="Contacts">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Calendar">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Bookmarks">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Notifications">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Clipboard">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+            </provider>
+        </column>
+        <column name="RCPAllowChangeDataSettings">
+            <provider name="Contacts">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+                <property name="knox-sanitize-data" value="false" />
+            </provider>
+            <provider name="Calendar">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="false" />
+            </provider>
+            <provider name="Bookmarks">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+                <property name="knox-sanitize-data" value="false" />
+            </provider>
+            <provider name="Notifications">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="true" />
+                <property name="knox-sanitize-data" value="true" />
+            </provider>
+            <provider name="Clipboard">
+                <property name="knox-import-data" value="true" />
+                <property name="knox-export-data" value="false" />
+            </provider>
+        </column>
+    </row>
+</table>

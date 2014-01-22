@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/undoPanel" layout="@layout/card_view_list_item_delete_undo" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/parentPanel" android:background="@drawable/glance_preview_bg" android:paddingLeft="4.0dip" android:paddingTop="3.0dip" android:paddingRight="7.0dip" android:paddingBottom="3.0dip" android:layout_width="fill_parent" android:layout_height="@dimen/card_preview_parent_panel_height">
+        <ImageView android:id="@id/card_image" android:background="#00ffffff" android:visibility="gone" android:layout_width="70.0dip" android:layout_height="70.0dip" />
+        <LinearLayout android:orientation="vertical" android:id="@id/card_textPanel" android:paddingLeft="10.0dip" android:paddingTop="15.0dip" android:paddingRight="0.0dip" android:paddingBottom="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="15.0sp" android:textColor="#ff006380" android:ellipsize="end" android:id="@id/card_title" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="17.0dip" android:singleLine="true" android:includeFontPadding="false" />
+            <TextView android:textSize="21.0sp" android:textColor="#ff0e293f" android:id="@id/card_text1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxHeight="46.0dip" android:includeFontPadding="false" android:fontFamily="sans-serif-light" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
