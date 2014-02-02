@@ -709,6 +709,19 @@
 
 .field mWindowManagerFuncs:Landroid/view/WindowManagerPolicy$WindowManagerFuncs;
 
+.field mIsVolLongPressed:Z
+
+.field mVolBtnMusicControls:I
+
+.field mVolBtnTimeout:I
+
+.field mVolBtnVolDown:I
+
+.field mVolBtnVolUp:I
+
+.field final mVolumeDownLongPress:Ljava/lang/Runnable;
+
+.field final mVolumeUpLongPress:Ljava/lang/Runnable;
 
 # direct methods
 .method static constructor <clinit>()V
@@ -1368,6 +1381,18 @@
     invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$ScreenLockTimeout;-><init>(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
 
     iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mScreenLockTimeout:Lcom/android/internal/policy/impl/PhoneWindowManager$ScreenLockTimeout;
+
+new-instance v0, Lcom/android/internal/policy/impl/PhoneWindowManager$MusicNext;
+
+    invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$MusicNext;-><init>(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
+
+    iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeUpLongPress:Ljava/lang/Runnable;
+
+    new-instance v0, Lcom/android/internal/policy/impl/PhoneWindowManager$MusicPrev;
+
+    invoke-direct {v0, p0}, Lcom/android/internal/policy/impl/PhoneWindowManager$MusicPrev;-><init>(Lcom/android/internal/policy/impl/PhoneWindowManager;)V
+
+iput-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownLongPress:Ljava/lang/Runnable;
 
     return-void
 .end method
@@ -14028,6 +14053,50 @@
     throw v2
 .end method
 
+.method handleVolumeLongPress(I)V
+    .registers 6
+
+    const/16 v1, 0x18
+
+    if-ne p1, v1, :cond_f
+
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeUpLongPress:Ljava/lang/Runnable;
+
+    :goto_6
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mHandler:Landroid/os/Handler;
+
+    iget v2, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolBtnTimeout:I
+
+    int-to-long v2, v2
+
+    invoke-virtual {v1, v0, v2, v3}, Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    return-void
+
+    :cond_f
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownLongPress:Ljava/lang/Runnable;
+
+    goto :goto_6
+.end method
+
+.method handleVolumeLongPressAbort()V
+    .registers 3
+
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mHandler:Landroid/os/Handler;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeUpLongPress:Ljava/lang/Runnable;
+
+    invoke-virtual {v0, v1}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+
+    iget-object v0, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mHandler:Landroid/os/Handler;
+
+    iget-object v1, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolumeDownLongPress:Ljava/lang/Runnable;
+
+    invoke-virtual {v0, v1}, Landroid/os/Handler;->removeCallbacks(Ljava/lang/Runnable;)V
+
+    return-void
+.end method
+
 .method public hasNavigationBar()Z
     .registers 2
 
@@ -18804,6 +18873,57 @@
 
     .line 5867
     :sswitch_1df
+move-object/from16 v0, p0	
+
+	iget v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolBtnMusicControls:I
+
+    if-eqz v0, :cond_265
+
+    invoke-virtual/range {p0 .. p0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->isMusicActive()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_265
+
+ 	move-object/from16 v0, p0
+
+    iget-boolean v0, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mScreenOnEarly:Z
+
+    if-nez v0, :cond_265
+
+    if-eqz v6, :cond_253
+
+    move-object/from16 v0, p0
+
+    move/from16 v1, v12
+
+    invoke-virtual {v0, v1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->handleVolumeLongPress(I)V
+
+	const/4 v15, 0x0
+
+    goto/16 :cond_9
+
+    :cond_253
+    move-object/from16 v0, p0
+
+    invoke-virtual {v0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->handleVolumeLongPressAbort()V
+
+    iget-boolean v1, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mIsVolLongPressed:Z
+
+    if-nez v1, :cond_262
+
+    move/from16 v1, v12
+
+    const/4 v3, 0x3
+
+    invoke-virtual {v0, v3, v1}, Lcom/android/internal/policy/impl/PhoneWindowManager;->handleVolumeKey(II)V
+
+    :cond_262
+    const/4 v1, 0x0
+
+    iput-boolean v1, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mIsVolLongPressed:Z
+
+:cond_265
     if-eqz v6, :cond_207
 
     .line 5868
@@ -29441,6 +29561,54 @@
 
     move-result-object v10
 
+const-string v11, "volbtn_music_controls"
+
+    const/4 v12, 0x0
+
+    invoke-static {v10, v11, v12}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v3
+
+    move-object/from16 v0, p0
+
+    iput v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolBtnMusicControls:I
+
+    const-string v11, "volbtn_timeout"
+
+    const/16 v12, 0x190
+
+    invoke-static {v10, v11, v12}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v3
+
+    move-object/from16 v0, p0
+
+    iput v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolBtnTimeout:I
+
+    const-string v11, "volbtn_vol_up"
+
+    const/16 v12, 0x57
+
+    invoke-static {v10, v11, v12}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v3
+
+    move-object/from16 v0, p0
+
+    iput v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolBtnVolUp:I
+
+    const-string v11, "volbtn_vol_down"
+
+    const/16 v12, 0x58
+
+    invoke-static {v10, v11, v12}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+
+    move-result v3
+
+    move-object/from16 v0, p0
+
+iput v3, v0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mVolBtnVolDown:I
+	
     .line 1622
     .local v10, "resolver":Landroid/content/ContentResolver;
     const/4 v12, 0x0
@@ -30580,4 +30748,88 @@
         0x8ca -> :sswitch_79
         0x8fc -> :sswitch_c
     .end sparse-switch
+.end method
+
+.method protected sendMediaButtonEvent(I)V
+    .registers 15
+
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v1
+
+    new-instance v11, Landroid/content/Intent;
+
+    const-string v4, "android.intent.action.MEDIA_BUTTON"
+
+    const/4 v5, 0x0
+
+    invoke-direct {v11, v4, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    new-instance v0, Landroid/view/KeyEvent;
+
+    const/4 v5, 0x0
+
+    const/4 v7, 0x0
+
+    move-wide v3, v1
+
+    move v6, p1
+
+    invoke-direct/range {v0 .. v7}, Landroid/view/KeyEvent;-><init>(JJIII)V
+
+    invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->dispatchMediaKeyWithWakeLockToAudioService(Landroid/view/KeyEvent;)V
+
+    const/16 v2, 0x1
+
+    invoke-static {v0, v2}, Landroid/view/KeyEvent;->changeAction(Landroid/view/KeyEvent;I)Landroid/view/KeyEvent;
+
+    move-result-object v0
+
+    invoke-virtual {p0, v0}, Lcom/android/internal/policy/impl/PhoneWindowManager;->dispatchMediaKeyWithWakeLockToAudioService(Landroid/view/KeyEvent;)V
+
+    return-void
+
+    const-string v4, "android.intent.extra.KEY_EVENT"
+
+    invoke-virtual {v11, v4, v0}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v11, v5}, Landroid/content/Context;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+
+    new-instance v12, Landroid/content/Intent;
+
+    const-string v4, "android.intent.action.MEDIA_BUTTON"
+
+    const/4 v5, 0x0
+
+    invoke-direct {v12, v4, v5}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    new-instance v3, Landroid/view/KeyEvent;
+
+    const/4 v8, 0x1
+
+    const/4 v10, 0x0
+
+    move-wide v4, v1
+
+    move-wide v6, v1
+
+    move v9, p1
+
+    invoke-direct/range {v3 .. v10}, Landroid/view/KeyEvent;-><init>(JJIII)V
+
+    const-string v4, "android.intent.extra.KEY_EVENT"
+
+    invoke-virtual {v12, v4, v3}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
+
+    iget-object v4, p0, Lcom/android/internal/policy/impl/PhoneWindowManager;->mContext:Landroid/content/Context;
+
+    const/4 v5, 0x0
+
+    invoke-virtual {v4, v12, v5}, Landroid/content/Context;->sendOrderedBroadcast(Landroid/content/Intent;Ljava/lang/String;)V
+
+    return-void
 .end method
