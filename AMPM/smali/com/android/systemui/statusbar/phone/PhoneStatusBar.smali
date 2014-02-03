@@ -14410,7 +14410,7 @@
 .end method
 
 .method public showClock(Z)V
-    .locals 3
+    .locals 6
     .parameter "show"
 
     .prologue
@@ -14446,6 +14446,22 @@
     if-eqz v1, :cond_2
 
     const/4 v1, 0x0
+	
+iget-object v2, p0, Lcom/android/systemui/SystemUI;->mContext:Landroid/content/Context;
+
+invoke-virtual {v2}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+
+move-result-object v2
+
+const-string v3, "hide_time"
+
+invoke-static {v2, v3, v1}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
+	
+move-result v2
+	
+if-eqz v2, :goto_1
+	
+const/16 v1, 0x8
 
     :goto_1
     invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V

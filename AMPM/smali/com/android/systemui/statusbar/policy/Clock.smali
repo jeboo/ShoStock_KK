@@ -140,7 +140,24 @@
 
     move-result-object v7
 
-    .line 178
+  invoke-virtual {v7}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;  
+ 	    move-result-object v2  
+ 	    const-string v6, "hide_time"  
+    const/4 v0, 0x0  
+     invoke-static {v2, v6, v0}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I  
+     move-result v6  
+   const/4 v0, 0x0  
+     if-eqz v6, :cond_nohide  
+   const/16 v0, 0x8  
+ 
+ 	   :cond_nohide  
+     const v1, 0x7f070078  
+ move-object/from16 v2, p0  
+invoke-virtual {v2, v1}, Lcom/android/systemui/statusbar/phone/PhoneStatusBarView;->findViewById(I)Landroid/view/View;  
+ 	 move-result-object v1  
+ invoke-virtual {v1, v0}, Landroid/view/View;->setVisibility(I)V       
+	
+	.line 178
     .local v7, context:Landroid/content/Context;
     invoke-static {v7}, Lcom/android/systemui/statusbar/policy/Clock;->is24HourFormat(Landroid/content/Context;)Z
 
@@ -990,6 +1007,20 @@
     invoke-virtual {p0}, Landroid/view/View;->getContext()Landroid/content/Context;
 
     move-result-object v9
+
+invoke-virtual {v9}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;  
+
+	move-result-object v10 
+
+	const-string v11, "hide_ampm"  
+
+	const/4 v12, 0x0  
+
+	invoke-static {v10, v11, v12}, Landroid/provider/Settings$System;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I  
+
+	move-result v10
+
+if-nez v10, :cond_1
 
     invoke-static {v9}, Lcom/android/systemui/statusbar/policy/Clock;->is24HourFormat(Landroid/content/Context;)Z
 
